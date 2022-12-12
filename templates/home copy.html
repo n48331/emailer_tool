@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!(
+{% if user.is_superuser %}
+Admin
+{% endif %}
+)
+<div class="search">
+    <form method="GET" action="">
+        {% csrf_token %}
+        <input type="text" id="country" name="country" placeholder="country ...">
+        <input type="text" id="product" name="product" placeholder="product name ...">
+
+        <input type="submit" value="Search">
+        <script>
+            $(function () {
+                var availableCountries = [
+                    {% for country in countries %}
+            "{{country.name}}",
+                {% endfor %}
+            ];
+            $("#country").autocomplete({
+                source: availableCountries
+            });
+        });
+            $(function () {
+                var availableProducts = [
+                    {% for product in products %}
+            "{{product.name}}",
+                {% endfor %}
+            ];
+            $("#product").autocomplete({
+                source: availableProducts
+            });
+        });
+        </script>
+    </form>
+</div>
+<br><br>
+<table style="width: 50%;">
+    {% for file in files %}
+    <tr style="height: 40px;">
+        <td>{{ file.country }}</td>
+        <td>{{ file.product }}</td>
+        <td>{{ file.productId }}</td>
+        <td><a href="/media/{{ file.file }}" download>download</a></td>
+        <td><a href="/media/{{ file.preview }}">view</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+<!-- <style>
+    .data ul {
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+
+    }
+
+    .data ul li {
+        list-style: none;
+    }
+</style>
+
+
+<div class="data">
+    <ul>
+        <li>{{ file.country }}</li>
+        <li>{{ file.product }}</li>
+        <li>{{ file.productId }}</li>
+        <li><a href="/media/{{ file.file }}" download>download</a></li>
+        <li><a href="/media/{{ file.preview }}">view</a></li>
+    </ul>
+</div> -->
+
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+{% endblock %}

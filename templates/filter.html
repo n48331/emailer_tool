@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!(
+{% if user.is_superuser %}
+Admin
+{% endif %}
+)
+
+
+{% for file in files %}
+<style>
+    .data ul {
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+
+    }
+
+    .data ul li {
+        list-style: none;
+    }
+</style>
+
+<div class="data">
+    <ul>
+        <li>{{ file.productId }}</li>
+        <li>{{ file.country }}</li>
+        <li>{{ file.product }}</li>
+        <li><a href="/media/{{ file.file }}" download>download</a></li>
+        <li><a href="/media/{{ file.preview }}">view</a></li>
+    </ul>
+</div>
+
+{% endfor %}
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+{% endblock %}
