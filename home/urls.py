@@ -9,5 +9,5 @@ urlpatterns = [
          views.filterProject, name='filter'),
     path('filter/',
          views.filterProject, name='notfound'),
-
+     path('accounts/register/', views.register, name='register'),
 ]

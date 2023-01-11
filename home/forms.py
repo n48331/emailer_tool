@@ -6,3 +6,4 @@ class SearchFile(ModelForm):
     class Meta:
         model = File
         fields = ['country', 'product']
+

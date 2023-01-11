@@ -1,25 +1,93 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 
 <head>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <meta charset="utf-8">
     <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
-    </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
-    </script>
 
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet"
         type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
 </head>
+<style>
+
+
+</style>
 
 <body>
+    <div class="header_top header">
+        <div class="container">
+            <div class="Fiender_text_1">Email Finder</div>
+            <div class="Fiender_text_2">Find Your Related Emailer</div>
+        </div>
+        <div class="profile">
+            {% if user.is_authenticated %}
+            <h2>{{ user.username }} <span>
+                    {% if user.is_superuser %}
+                    <i class="fa fa-check-circle admin-icon" aria-hidden="true"></i>
+                    {% endif %}
+                </span></h2>
+                <a title="Logout" class="logout" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+            {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'login' %}">Log In</a>
+            {% endif %}
+        </div>
+    </div>
     <main>
         {% block content %}
         {% endblock %}
 
     </main>
+    <div class="spacer"></div>
+    <div class="finder_footer bg-primary vh-100">
+        <footer class="text-center text-white">
+            <!-- Grid container -->
+            <div class="container">
+                <!-- Section: Images -->
+                <section class="">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                            <div class="bg-image">
+                                <img src="{% static 'images/footer-logo.png' %}" class="w-100 h-50" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 mb-4 mb-md-0"></div>
+                        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                            <section>
+                                <div class=" text-center text-md-start  py-3  bg-primary">
+                                    <!-- Copyright -->
+                                    <div class="text-white mb-0 mb-md-0">
+                                        Copyright © 2023. All rights reserved.
+                                    </div>
+                                    <!-- Copyright -->
+
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </section>
+                <!-- Section: Images -->
+            </div>
+
+
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/fontawesome.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 
 </body>
 

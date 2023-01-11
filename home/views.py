@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .filters import FileFilter
 from json import dumps
+
+from django.contrib.auth import login, authenticate
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 
@@ -31,4 +35,19 @@ def filterProject(request, country, product):
     context = {
         'files': files,
     }
-    return render(request, 'filter.html', context)
+    return render(request, 'home.html', context)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, f'Your account has been created. You can log in now!')    
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+
+    context = {'form': form}
+    return render(request, 'registration/register.html', context)
