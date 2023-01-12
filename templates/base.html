@@ -4,9 +4,10 @@
 <html>
 
 <head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <meta charset="utf-8">
-    <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+    <title>{% block title %}{% endblock %} | CEB Email Finder</title>
 
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet"
         type="text/css" />
@@ -32,15 +33,18 @@
         </div>
         <div class="profile">
             {% if user.is_authenticated %}
-            <h2>{{ user.username }} <span>
+            
                     {% if user.is_superuser %}
-                    <i class="fa fa-check-circle admin-icon" aria-hidden="true"></i>
+                    <a href="/admin" title="admin panel"><h2>{{ user.username }} <span><i class="fa fa-check-circle admin-icon" aria-hidden="true"></i> </span></h2></a> 
+                    {% else %}
+                    <h2>{{ user.username }}</h2>
                     {% endif %}
-                </span></h2>
+               
                 <a title="Logout" class="logout" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             {% else %}
-            <p>You are not logged in</p>
-            <a href="{% url 'login' %}">Log In</a>
+            {% if request.path != '/accounts/login/' %}
+            <a style="text-decoration: none;" class="logout" href="{% url 'login' %}"><h2 style="font-size: 16px;text-decoration: none;">Log In <i class="fa fa-sign-in" aria-hidden="true"></i></h2></a>
+            {% endif %}
             {% endif %}
         </div>
     </div>

@@ -3,6 +3,7 @@
 {% block title %}Home{% endblock %}
 {% load widget_tweaks %}
 {% block content %}
+
 <div class="container mt-5">
     <form method="GET" action="" id="filterform">
         {% csrf_token %}
@@ -12,12 +13,12 @@
                 {% render_field fileFilter.form.country__name class="form-control " placeholder="country" %}
             </div>
             <div class="form-group col-md-3">
-                <label for="id_product__name">CRM Product</label>
-                {% render_field fileFilter.form.product__name  class="form-control" placeholder="CRM Product" %}
+                <label for="id_crmProduct__name">CRM Product</label>
+                {% render_field fileFilter.form.crmProduct__name  class="form-control" placeholder="CRM Product" %}
             </div>
             <div class="form-group col-md-3">
-                <label for="id_productId">My Sheet ID</label>
-                {% render_field fileFilter.form.productId class="form-control" placeholder="My Sheet ID" %}
+                <label for="id_mysheetId">My Sheet ID</label>
+                {% render_field fileFilter.form.mysheetId class="form-control" placeholder="My Sheet ID" %}
             </div>
             <div class="form-group col-md-3">
                 <button type="submit" class="btn btn-primary finder_margin_top">Search</button>
@@ -42,8 +43,8 @@
             {% for file in files %}
             <tr style="height: 40px;">
                 <td>{{ file.country }}</td>
-                <td>{{ file.product }}</td>
-                <td>{{ file.productId }}</td>
+                <td>{{ file.crmProduct }}</td>
+                <td>{{ file.mysheetId }}</td>
                 <td><a style="text-decoration: none;" href="/media/{{ file.file }}" download>
                         download <i class="fa fa-download" aria-hidden="true"></i></a></td>
                 <td><a target="_blank" href="/media/{{ file.preview }}">view <i class="fa fa-eye" aria-hidden="true"></i></a></td>
@@ -57,8 +58,8 @@
     document.getElementById("clearForm").addEventListener("click", function (event) {
         event.preventDefault()
         document.getElementById('id_country__name').value = ''
-        document.getElementById('id_product__name').value = ''
-        document.getElementById('id_productId').value = ''
+        document.getElementById('id_crmProduct__name').value = ''
+        document.getElementById('id_mysheetId').value = ''
         // document.getElementById('filterform').submit()
 
     })
@@ -73,24 +74,24 @@
         });
     });
     $(function () {
-        const products = JSON.parse("{{products|escapejs}}");
+        const crmProducts = JSON.parse("{{crmProducts|escapejs}}");
         var availableProducts = [];
-        for (var x in products) {
-            availableProducts.push(products[x].name)
+        for (var x in crmProducts) {
+            availableProducts.push(crmProducts[x].name)
         }
-        $("#id_product__name").autocomplete({
+        $("#id_crmProduct__name").autocomplete({
             source: availableProducts
         });
     });
     $(function () {
-        const productIds = JSON.parse("{{productIds|escapejs}}");
+        const mysheetIds = JSON.parse("{{mysheetIds|escapejs}}");
 
-        var availableProductIds = [];
-        for (var x in productIds) {
-            availableProductIds.push(productIds[x].productId)
+        var availablemysheetIds = [];
+        for (var x in mysheetIds) {
+            availablemysheetIds.push(mysheetIds[x].mysheetId)
         }
-        $("#id_productId").autocomplete({
-            source: availableProductIds
+        $("#id_mysheetId").autocomplete({
+            source: availablemysheetIds
         });
     });
 

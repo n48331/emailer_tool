@@ -1,4 +1,104 @@
-body {
-    background-color: lightblue;
-    font-family: verdana;
+*{
+    box-sizing: border-box;
   }
+  html, body {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+  }
+  a{
+    text-decoration: none;
+  }
+  .header_top {
+    height: 90px;
+    width: 100%;
+    background-color: #2b6ae9;
+    border: 1px solid #2b6ae9;
+  }
+  .bg_color {
+    background-color: #2b6ae9;
+  }
+  .text_color {
+    color: #ffffff;
+  }
+  
+  .Fiender_text_1 {
+    color: #ffffff;
+    font-family: Sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .Fiender_text_2 {
+    color: #ffffff;
+    font-family: Sans-serif;
+    font-size: 16px;
+    
+  }
+  
+  .finder_footer {
+    /* height: 100%; */
+    width: 100%;
+    background-color: #2b6ae9;
+    position: fixed;
+    bottom: 0;
+    
+  }
+  .finder_body {
+    display: flex;
+    align-items: center;
+    width: 400px;
+  }
+  
+  .finder_margin_top {
+    margin-top: 32px;
+  }
+  .header {
+    display: flex;
+    box-shadow: 0px 6px 49px -4px rgba(181,181,181,0.79);
+}
+
+.profile {
+    padding: 1rem;
+    padding-right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile h2 {
+    text-transform: capitalize;
+    font-size: 16px;
+    margin: 0;
+    color: #fff;
+}
+.profile h2 >span{
+    font-size: 10px;
+    
+}
+.admin-icon{
+    color: rgb(91, 237, 91);
+    font-size: 14px;
+}
+.logout{
+    font-size: 1rem;
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    
+}
+.logout:hover{
+    color: white;
+}
+#id_country__name::placeholder,
+#id_productId::placeholder,
+#id_product__name::placeholder{
+    font-weight: 100;
+    opacity: .5;
+}
+#id_country__name,#id_product__name,#id_productId{
+    color: #2b6ae9;
+    font-weight: 600;
+}

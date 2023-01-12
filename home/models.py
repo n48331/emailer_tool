@@ -8,13 +8,13 @@ import os
 
 
 def project_filename(instance, filename):
-    filename_ = instance.productId
+    filename_ = instance.mysheetId
     file_extension = filename.split('.')[-1]
     return 'Files/projects/%s.%s' % (filename_, file_extension)
 
 
 def preview_filename(instance, filename):
-    filename_ = instance.productId
+    filename_ = instance.mysheetId
     file_extension = filename.split('.')[-1]
     return 'Files/preview/%s.%s' % (filename_, file_extension)
 
@@ -34,9 +34,9 @@ class Product(models.Model):
 
 
 class File(models.Model):
-    productId = models.CharField(max_length=50, unique=True)
+    mysheetId = models.CharField(max_length=50, unique=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    crmProduct = models.ForeignKey(Product, on_delete=models.CASCADE)
     file = models.FileField(null=False, blank=False,
                             upload_to=project_filename)
     preview = models.FileField(
@@ -45,7 +45,7 @@ class File(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.productId + " || " + self.country.name + " || " + self.product.name
+        return self.mysheetId + " || " + self.country.name + " || " + self.crmProduct.name
 
     def extension(self):
         name, extension = os.path.splitext(self.file.name)

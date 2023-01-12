@@ -68,15 +68,18 @@
     gap: 1rem;
 }
 
-.profile>h2 {
+.profile h2 {
     text-transform: capitalize;
     font-size: 16px;
     margin: 0;
     color: #fff;
 }
-.profile>h2 >span{
+.profile h2 >span{
     font-size: 10px;
     
+}
+.profile a{
+  text-decoration: none !important;
 }
 .admin-icon{
     color: rgb(91, 237, 91);
@@ -85,18 +88,24 @@
 .logout{
     font-size: 1rem;
     color: #000;
+    text-decoration: none !important;
+    font-weight: 700;
     
 }
 .logout:hover{
     color: white;
 }
 #id_country__name::placeholder,
-#id_productId::placeholder,
-#id_product__name::placeholder{
+#id_crmProduct__name::placeholder,
+#id_mysheetId::placeholder{
     font-weight: 100;
     opacity: .5;
 }
-#id_country__name,#id_product__name,#id_productId{
+#id_country__name,#id_crmProduct__name,#id_mysheetId{
     color: #2b6ae9;
     font-weight: 600;
+}
+.spacer{
+  height: 10rem;
+  width: 100%;
 }

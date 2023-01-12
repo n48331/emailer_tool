@@ -15,23 +15,22 @@ def home(request):
     files = File.objects.all()
     fileFilter = FileFilter(request.GET, queryset=files)
     countries = list(Country.objects.values())
-    products = list(Product.objects.values())
-    productIds = list(File.objects.values('productId'))
-    print(productIds)
+    crmProducts = list(Product.objects.values())
+    mysheetIds = list(File.objects.values('mysheetId'))
     files = fileFilter.qs
     context = {
         'files': files,
         'countries': dumps(countries),
-        'products': dumps(products),
-        'productIds': dumps(productIds),
+        'crmProducts': dumps(crmProducts),
+        'mysheetIds': dumps(mysheetIds),
         'fileFilter': fileFilter
     }
     return render(request, 'home.html', context)
 
 
-def filterProject(request, country, product):
+def filterProject(request, country, crmProduct):
 
-    files = File.objects.filter(country=country).filter(product=product)
+    files = File.objects.filter(country=country).filter(crmProduct=crmProduct)
     context = {
         'files': files,
     }
